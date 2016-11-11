@@ -21,11 +21,11 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
     };
 // add new items
     $scope.addTodo = function () {
-        if (!$scope.text){
-            alert ("You must enter somethings");
+        if (!$scope.text) {
+            alert("You must enter somethings");
         }
-        else if ($scope.text ==""){
-            alert ("You must enter somethings");
+        else if ($scope.text == "") {
+            alert("You must enter somethings");
         }
         else {
             $scope.todos.push({
@@ -35,7 +35,7 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
             $scope.todoText = ''; //clear the input after adding
             localStorage.setItem('todos', JSON.stringify($scope.todos));
         }
-        };
+    };
 
 
     $scope.deleted = function (index) {
@@ -53,6 +53,7 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
             alert("Invalid JSON!");
         }
     }
+//mark all checked
 
     //count
     $scope.remaining = function () {
