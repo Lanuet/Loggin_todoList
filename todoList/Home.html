@@ -7,19 +7,21 @@
             <form ng-submit="addTodo()" class="todo-form">
                 <input type="text" ng-model="todoText" placeholder="Enter new ToDo item" class="input_" autofocus/>
             </form>
+            <input type="checkbox" value="Mark all Checked" ng-model="allChecked" ng-change="MarkallChecked()">
+            <span>Mark all Cheked</span>
             <ul class="list-group">
-                <li ng-repeat="todo in todos track by $index" class="list-group-item">
+                <li ng-repeat="todo in todos |filter: filterCompleted" class="list-group-item">
                     <input type="checkbox" ng-model="todo.done">
                     <input class="done-{{ todo.done }} name" ng-model="todo.text" >
-                    <input type="button" class="btn btn-danger" ng-click="deleted(index)" value="Delete">
+                    <input type="button" class="btn btn-danger" ng-click="deleted($index)" value="Delete">
                 </li>
             </ul>
             <div class="header">
                 <span>{{ remaining() }} of {{ todos.length }} remaining</span>
             </div>
-            <input type="button" class="btn btn-info" ng-click="archive()" value="All">
-            <input type="button" class="btn btn-info" ng-click="archive()" value="Active">
-            <input type="button" class="btn btn-info" ng-click="archive()" value="Completed">
+            <input type="button" class="btn btn-info"  ng-click="status='ALL'" value="ALL">
+            <input type="button" class="btn btn-info"  ng-click="status='ACTIVE'" value="ACTIVE">
+            <input type="button" class="btn btn-info"  ng-click="status='COMPLETED'" value="COMPLETED">
             <input type="button" class="btn btn-info" ng-click="archive()" value="Remove Completed Items">
             <input type="button" class="btn btn-info" ng-click="logout()" value="Logout">
 

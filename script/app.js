@@ -15,7 +15,7 @@ mainApp.config(['$routeProvider', function ($routeProvider, $cookieStore) {
             templateUrl: 'todoList/Home.html',
             controller: 'HomeController'
         })
-        .wheṇ('/register', {
+        .when('/register', {
             templateUrl: 'Register/register.html',
             controller: 'RegisterController'
         })

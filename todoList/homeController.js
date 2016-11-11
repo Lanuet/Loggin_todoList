@@ -4,27 +4,22 @@
 
 mainApp.controller('HomeController', function ($scope, $location, $rootScope, $cookieStore) {
     $scope.todos = [];
+    $scope.status = "ALL";
+    // $scope.allChecked = false;
     if (localStorage['todos']) {
         $scope.todos = JSON.parse(localStorage.getItem("todos"));
-        // console.log($scope.todos)
-        // localStorage.getItem('todos');
     }
     $rootScope.state = $cookieStore.get('state');
-    if (!$rootScope.state) {
+    if (!$rootScope.state && !localStorage['profile']) {
         $location.path('/');
     }
-    //logout
-    $rootScope.logout = function () {
-        $rootScope.state = {};
-        $cookieStore.remove('state');
-        $location.path('/');
-    };
+
 // add new items
     $scope.addTodo = function () {
-        if (!$scope.text) {
+        if (!$scope.todoText) {
             alert("You must enter somethings");
         }
-        else if ($scope.text == "") {
+        else if ($scope.todoText == "") {
             alert("You must enter somethings");
         }
         else {
@@ -37,24 +32,17 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
         }
     };
 
-
     $scope.deleted = function (index) {
-        // console.log("1");
         $scope.todos.splice(index, 1);
         localStorage.removeItem(index);
-        jsonToLocalStorage($scope.todos);
-    }
-    function jsonToLocalStorage(todos) {
-        var jsonTodo = angular.toJson(todos);
-
-        if (jsonTodo != 'null') {
-            localStorage.setItem("todos", jsonTodo);
-        } else {
-            alert("Invalid JSON!");
-        }
+        localStorage.setItem("todos", angular.toJson(todos));
     }
 //mark all checked
-
+    $scope.MarkallChecked = function () {
+        for (var i = 0; i < todos.length; i++) {
+            $scope.todos[i].done = $scope.allChecked;
+        }
+    }
     //count
     $scope.remaining = function () {
         var count = 0;
@@ -73,5 +61,31 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
         });
         localStorage.setItem('todos', JSON.stringify($scope.todos));
     };
+    $scope.filterCompleted = function (todo) {
+        switch ($scope.status) {
+            case "ALL":
+                return todo;
+                break;
+            case "ACTIVE":
+                return !todo.done;
+                break;
+            case "COMPLETED":
+                return todo.done;
+                break;
+        }
+        return todo.completed;
+    };
+    //logout
+    $rootScope.logout = function () {
+        $rootScope.state = {};
+        $cookieStore.remove('state');
+        $location.path('/');
+    };
+    $scope.$watch("todos", function (newVal, oldVal) {
+        if (newVal !== null && angular.isDefined(newVal) && newVal !== oldVal) {
+            // localStorageService.add("todos",angular.toJson(newVal));
+            localStorage.setItem('todos', angular.toJson(newVal));
+        }
+    }, true);
 });
 

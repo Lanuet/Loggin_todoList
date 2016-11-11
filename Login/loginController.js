@@ -8,14 +8,29 @@ mainApp.controller('LoginController', function ($scope, $location, $rootScope, $
     }
 
     $scope.login = function () {
-        if ($scope.userName == 'test' && $scope.password == 'test') {
-            $rootScope.state = {
-                currentState: true
-            };
-            $cookieStore.put('state', $rootScope.state);
-            $location.path('/home');
+        $scope.temp = [];
+        $scope.temp = JSON.parse(localStorage.getItem("profile"));
+        if (localStorage['profile'] != null){
+            for (var i = 0; i < $scope.temp.length; i++) {
+                if ($scope.username == $scope.temp[i].username && $scope.password == $scope.temp[i].password) {
+                    $rootScope.state = {
+                        currentState: true
+                    };
+                    $cookieStore.put('state', $rootScope.state);
+                    $location.path('/home');
+                    break;
+                }
+                else {
+                    alert ("Username or password is not correct");
+                }
+            }
         }
-        else alert("password or username is incorrect");
+        else {
+            alert ("Username or password is not correct");
+        }
+    }
+    $scope.register = function () {
+        $location.path('/register');
     };
 
 
