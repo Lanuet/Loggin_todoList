@@ -1,4 +1,27 @@
+.done-true {
+    text-decoration: line-through;
+}
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0px auto;
+}
+.name {
+    width: 680px;
+
+}
+.name:hover {
+    cursor: text;
+}
+.name {
+    border: white 1px;
+}
+.input_{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: inline;
+}
 span {
-    color: red;
-    background-color: #00b3ee;
+    color: #00b3ee;
 }

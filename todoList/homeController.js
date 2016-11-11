@@ -21,13 +21,22 @@ mainApp.controller('HomeController', function ($scope, $location, $rootScope, $c
     };
 // add new items
     $scope.addTodo = function () {
-        $scope.todos.push({
-            text: $scope.todoText,
-            done: false
-        });
-        $scope.todoText = ''; //clear the input after adding
-        localStorage.setItem('todos', JSON.stringify($scope.todos));
-    };
+        if (!$scope.text){
+            alert ("You must enter somethings");
+        }
+        else if ($scope.text ==""){
+            alert ("You must enter somethings");
+        }
+        else {
+            $scope.todos.push({
+                text: $scope.todoText,
+                done: false
+            });
+            $scope.todoText = ''; //clear the input after adding
+            localStorage.setItem('todos', JSON.stringify($scope.todos));
+        }
+        };
+
 
     $scope.deleted = function (index) {
         // console.log("1");

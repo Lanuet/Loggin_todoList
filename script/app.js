@@ -7,12 +7,12 @@ var mainApp = angular.module("loginApp", ['ngRoute', 'ngCookies']);
 mainApp.config(['$routeProvider', function ($routeProvider, $cookieStore) {
     $routeProvider
         .when('/', {
-                templateUrl: 'Authorization/views/login.html',
+                templateUrl: 'Login/login.html',
                 controller: 'LoginController'
             }
         )
         .when('/home', {
-            templateUrl: 'Authorization/views/Home.html',
+            templateUrl: 'todoList/Home.html',
             controller: 'HomeController'
         })
         .otherwise({

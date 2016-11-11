@@ -1,0 +1,31 @@
+
+<body>
+<h1>Todo List</h1>
+<div class="container">
+    <div>
+        <div class="container-fluid">
+            <form ng-submit="addTodo()" class="todo-form">
+                <input type="text" ng-model="todoText" placeholder="Enter new ToDo item" class="input_" autofocus/>
+            </form>
+            <ul class="list-group">
+                <li ng-repeat="todo in todos track by $index" class="list-group-item">
+                    <input type="checkbox" ng-model="todo.done">
+                    <input class="done-{{ todo.done }} name" ng-model="todo.text" >
+                    <input type="button" class="btn btn-danger" ng-click="deleted(index)" value="Delete">
+                </li>
+            </ul>
+            <div class="header">
+                <span>{{ remaining() }} of {{ todos.length }} remaining</span>
+            </div>
+            <input type="button" class="btn btn-info" ng-click="archive()" value="All">
+            <input type="button" class="btn btn-info" ng-click="archive()" value="Active">
+            <input type="button" class="btn btn-info" ng-click="archive()" value="Completed">
+            <input type="button" class="btn btn-info" ng-click="archive()" value="Remove Completed Items">
+            <input type="button" class="btn btn-info" ng-click="logout()" value="Logout">
+
+        </div>
+    </div>
+
+</div>
+</body>
+
